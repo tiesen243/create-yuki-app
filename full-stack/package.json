@@ -16,10 +16,6 @@
     "typecheck": "tsc --noEmit",
     "postinstall": "prisma generate"
   },
-  "bun-create": {
-    "preinstall": "echo launching create-yuki-app",
-    "postinstall": "bun update"
-  },
   "dependencies": {
     "@lucia-auth/adapter-prisma": "^4.0.1",
     "@prisma/client": "^5.21.1",

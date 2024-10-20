@@ -13,10 +13,6 @@
     "format:fix": "prettier --check . --write",
     "typecheck": "tsc --noEmit"
   },
-  "bun-create": {
-    "preinstall": "echo launching create-yuki-app",
-    "postinstall": "bun update"
-  },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
     "@t3-oss/env-nextjs": "^0.11.1",
