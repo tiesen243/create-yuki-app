@@ -1,3 +1,4 @@
+
 /** @typedef {import("prettier").Config} PrettierConfig */
 /** @typedef {import("prettier-plugin-tailwindcss").PluginOptions} TailwindConfig */
 /** @typedef {import("@ianvs/prettier-plugin-sort-imports").PluginConfig} SortImportsConfig */
@@ -20,13 +21,15 @@ const config = {
   importOrder: [
     '<TYPES>',
     '^(next/(.*)$)|^(next$)',
-    '^(react/(.*)$)|^(react$)',
+    '^(expo(.*)$)|^(expo$)',
+    '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
     '<THIRD_PARTY_MODULES>',
     '',
-    '<TYPES>^([.|..|@]/.*)$',
+    '<TYPES>^(@/(.*)$)',
+    '<TYPES>^[.|..]',
     '^@/',
-    '^[../]',
-    '^[./]',
+    '^[..]',
+    '^[.]',
   ],
 
   // Others

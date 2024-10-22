@@ -20,13 +20,15 @@ const config = {
   importOrder: [
     '<TYPES>',
     '^(next/(.*)$)|^(next$)',
-    '^(react/(.*)$)|^(react$)',
+    '^(expo(.*)$)|^(expo$)',
+    '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
     '<THIRD_PARTY_MODULES>',
     '',
-    '<TYPES>^([.|..|@]/.*)$',
+    '<TYPES>^(@/(.*)$)',
+    '<TYPES>^[.|..]',
     '^@/',
-    '^[../]',
-    '^[./]',
+    '^[..]',
+    '^[.]',
   ],
 
   // Others
