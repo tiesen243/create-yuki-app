@@ -22,6 +22,8 @@ export const Post: React.FC = () => {
   const [post, { refetch }] = api.post.getLatest.useSuspenseQuery()
   const createPost = api.post.create.useMutation({ onSuccess: () => refetch() })
 
+  console.log(createPost.error)
+
   return (
     <section className="flex flex-col items-center">
       <Typography>You are signed in as {session.user.username}</Typography>

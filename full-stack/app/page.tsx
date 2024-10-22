@@ -20,6 +20,7 @@ const Page: NextPage = async () => {
           width={2500}
           height={400}
           alt="tiesen"
+          priority
         />
 
         <Typography level="h1" className="text-center brightness-150">
