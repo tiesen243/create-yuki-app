@@ -2,26 +2,27 @@
 
 A Next.js template with TypeScript, Tailwind CSS, ESLint and Prettier.
 
+## The `Yuki` Stacks
+
+- [Next.js](https://nextjs.org)
+- [tRPC](https://trpc.io)
+- [Tailwind CSS](https://tailwindcss.com)
+- [TypeScript](https://typescriptlang.org)
+- [Prisma](https://prisma.io)
+- [Lucia auth](https://lucia-auth.com)
+
 ## Getting Started
 
 ### Create a new Next.js app
 
 ```bash
-# using npm
-npx create-next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/base
-npx create-next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/full-stack
-
-# using yarn
-yarn create next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/base
-yarn create next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/full-stack
-
-# using pnpm
-pnpx create-next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/base
-pnpx create-next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/full-stack
-
-# using bun
-bunx --bun create-next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/base
-bunx --bun create-next-app@latest --example https://github.com/tiesen243/create-yuki-app/tree/main/full-stack
+npx create-next-app@latest --example https://github.com/tiesen243/create-yuki-app
+# or
+yarn create next-app@latest --example https://github.com/tiesen243/create-yuki-app
+# or
+pnpx create-next-app@latest --example https://github.com/tiesen243/create-yuki-app
+# or
+bunx --bun create-next-app@latest --example https://github.com/tiesen243/create-yuki-app
 ```
 
 ### Create `.env` file
@@ -33,25 +34,14 @@ cp .env.example .env
 ### Start the development server
 
 ```bash
-# using npm
 npm run dev
-
-# using yarn
+# or
 yarn dev
-
-# using pnpm
+# or
 pnpm dev
-
-# using bun
+# or
 bun dev
 ```
-
-## Features
-
-- TypeScript
-- ESLint
-- Prettier
-- Tailwind CSS
 
 ## License
 
