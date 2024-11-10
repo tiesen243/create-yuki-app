@@ -1,4 +1,3 @@
-import Form from 'next/form'
 import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
@@ -44,11 +43,11 @@ const Page: React.FC = async () => {
         </Typography>
 
         {session ? (
-          <Post name={session.user.name} />
+          <Post name={session.user.username} />
         ) : (
-          <Form action="/api/auth/discord">
+          <form action="/api/auth/discord">
             <Button>Sign In</Button>
-          </Form>
+          </form>
         )}
       </main>
     </HydrateClient>

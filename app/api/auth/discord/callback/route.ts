@@ -1,5 +1,6 @@
+import type { NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { OAuth2RequestError } from 'arctic'
 
 import { discord, lucia } from '@/server/auth/lucia'

@@ -4,7 +4,7 @@ import { ThemeProvider } from 'next-themes'
 
 import { geistSans } from '@/lib/fonts'
 import { seo } from '@/lib/seo'
-import { TRPCReactProvider } from '@/lib/trpc/client'
+import { TRPCReactProvider } from '@/lib/trpc/react'
 import { cn } from '@/lib/utils'
 
 const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (

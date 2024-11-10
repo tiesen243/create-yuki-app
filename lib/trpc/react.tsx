@@ -6,9 +6,9 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { createTRPCReact, loggerLink, unstable_httpBatchStreamLink } from '@trpc/react-query'
 import SuperJSON from 'superjson'
 
+import type { AppRouter } from '@/server/api/root'
 import { createQueryClient } from '@/lib/trpc/query-client'
-import { AppRouter } from '@/server/api'
-import { getBaseUrl } from '../utils'
+import { getBaseUrl } from '@/lib/utils'
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined
 const getQueryClient = () => {
@@ -30,6 +30,7 @@ export const TRPCReactProvider: React.FC<React.PropsWithChildren> = ({ children 
       links: [
         loggerLink({
           enabled: (op) =>
+            // eslint-disable-next-line no-restricted-properties
             process.env.NODE_ENV === 'development' ||
             (op.direction === 'down' && op.result instanceof Error),
         }),

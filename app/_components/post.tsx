@@ -1,14 +1,15 @@
 'use client'
 
-import Form from 'next/form'
+import { useState } from 'react'
 
+import type { RouterInputs } from '@/server/api/root'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
-import { api } from '@/lib/trpc/client'
-import { signOut } from '@/server/auth'
+import { api } from '@/lib/trpc/react'
 
 export const Post: React.FC<{ name: string }> = ({ name }) => {
+  const [data, setData] = useState<RouterInputs['post']['createPost']>({ content: '' })
   const [latestPost, { refetch }] = api.post.getLatestPost.useSuspenseQuery()
   const createPost = api.post.createPost.useMutation({ onSuccess: () => refetch() })
 
@@ -17,22 +18,25 @@ export const Post: React.FC<{ name: string }> = ({ name }) => {
       <Typography>You are signed in as {name}</Typography>
       <Typography>Your latest post: {latestPost?.content ?? 'No posts yet'}</Typography>
 
-      <Form
+      <form
         className="mt-4 flex items-center gap-4"
-        action="/api/trpc/post.createPost"
-        onSubmit={async (e) => {
+        onSubmit={async (e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault()
-          const content = e.currentTarget.content.value ?? ''
-          if (!content) return
-          createPost.mutate({ content })
-          e.currentTarget.reset()
+          createPost.mutate(data)
+          setData({ content: '' })
         }}
       >
-        <Input name="content" disabled={createPost.isPending} />
+        <Input
+          name="content"
+          placeholder="What's on your mind?"
+          value={data.content}
+          onChange={(e) => setData({ content: e.target.value })}
+          disabled={createPost.isPending}
+        />
         <Button size="sm" disabled={createPost.isPending}>
           Post
         </Button>
-      </Form>
+      </form>
     </section>
   )
 }
