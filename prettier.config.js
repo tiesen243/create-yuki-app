@@ -20,6 +20,7 @@ const config = {
   importOrder: [
     '<TYPES>',
     '^(next/(.*)$)|^(next$)',
+    '^(react/(.*)$)|^(react$)',
     '<THIRD_PARTY_MODULES>',
     '',
     '<TYPES>^(@/(.*)$)',

@@ -1,6 +1,6 @@
 import { headers } from 'next/headers'
-import { createHydrationHelpers } from '@trpc/react-query/rsc'
 import { cache } from 'react'
+import { createHydrationHelpers } from '@trpc/react-query/rsc'
 
 import type { AppRouter } from '@/server/api/root'
 import { createQueryClient } from '@/lib/trpc/query-client'
