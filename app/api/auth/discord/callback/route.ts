@@ -6,6 +6,8 @@ import { OAuth2RequestError } from 'arctic'
 import { discord, lucia } from '@/server/auth/lucia'
 import { db } from '@/server/db'
 
+export const runtime = 'edge'
+
 export const GET = async (req: NextRequest) => {
   const cookie = await cookies()
 

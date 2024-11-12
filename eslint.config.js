@@ -1,7 +1,5 @@
 /// <reference types="./types.d.ts" />
 
-import * as path from 'node:path'
-import { includeIgnoreFile } from '@eslint/compat'
 import eslint from '@eslint/js'
 import nextPlugin from '@next/eslint-plugin-next'
 import importPlugin from 'eslint-plugin-import'
@@ -38,8 +36,6 @@ const restrictEnvAccess = tseslint.config(
 )
 
 const baseConfig = tseslint.config(
-  // Ignore files not tracked by VCS and any config files
-  includeIgnoreFile(path.join(import.meta.dirname, './.gitignore')),
   { ignores: ['**/*.config.*'] },
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx'],
