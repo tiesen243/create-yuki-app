@@ -22,7 +22,7 @@ const restrictEnvAccess = tseslint.config(
           object: 'process',
           property: 'env',
           message:
-            "Use `import { env } from '@yuki/env'` instead to ensure validated types.",
+            "Use `import { env } from '@/env'` instead to ensure validated types.",
         },
       ],
       'no-restricted-imports': [
@@ -31,7 +31,7 @@ const restrictEnvAccess = tseslint.config(
           name: 'process',
           importNames: ['env'],
           message:
-            "Use `import { env } from '@yuki/env'` instead to ensure validated types.",
+            "Use `import { env } from '@/env'` instead to ensure validated types.",
         },
       ],
     },
