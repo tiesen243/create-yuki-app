@@ -1,17 +1,18 @@
-/// <reference types="./types.d.ts" />
+// @ts-nocheck
 
-import eslint from '@eslint/js'
+import jseslint from '@eslint/js'
 import nextPlugin from '@next/eslint-plugin-next'
 import importPlugin from 'eslint-plugin-import'
+import a11yPlugin from 'eslint-plugin-jsx-a11y'
 import reactPlugin from 'eslint-plugin-react'
 import hooksPlugin from 'eslint-plugin-react-hooks'
 import tseslint from 'typescript-eslint'
 
 /**
- * All packages that leverage t3-env should use this rule
+ * All packages that leverage @yuki/env should use this rule
  */
 const restrictEnvAccess = tseslint.config(
-  { ignores: ['**/env.js', '**/env.ts'] },
+  { ignores: ['**/env.ts'] },
   {
     files: ['**/*.js', '**/*.ts', '**/*.tsx'],
     rules: {
@@ -20,7 +21,8 @@ const restrictEnvAccess = tseslint.config(
         {
           object: 'process',
           property: 'env',
-          message: "Use `import { env } from '@/env'` instead to ensure validated types.",
+          message:
+            "Use `import { env } from '@yuki/env'` instead to ensure validated types.",
         },
       ],
       'no-restricted-imports': [
@@ -28,7 +30,8 @@ const restrictEnvAccess = tseslint.config(
         {
           name: 'process',
           importNames: ['env'],
-          message: "Use `import { env } from '@/env'` instead to ensure validated types.",
+          message:
+            "Use `import { env } from '@yuki/env'` instead to ensure validated types.",
         },
       ],
     },
@@ -36,16 +39,13 @@ const restrictEnvAccess = tseslint.config(
 )
 
 const baseConfig = tseslint.config(
-  { ignores: ['**/*.config.*'] },
+  { ignores: ['*.config.*'] },
   {
-    files: ['**/*.js', '**/*.ts', '**/*.tsx'],
-    plugins: {
-      import: importPlugin,
-    },
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+    plugins: { import: importPlugin },
     extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
+      jseslint.configs.recommended,
+      ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
     ],
     rules: {
@@ -53,18 +53,21 @@ const baseConfig = tseslint.config(
         'warn',
         { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
       ],
-      '@typescript-eslint/no-misused-promises': [2, { checksVoidReturn: { attributes: false } }],
-      '@typescript-eslint/no-non-null-assertion': 'error',
-      '@typescript-eslint/no-unused-vars': [
+      '@typescript-eslint/no-misused-promises': [
         'error',
-        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+        { checksVoidReturn: { attributes: false } },
       ],
       '@typescript-eslint/no-unnecessary-condition': [
         'error',
         { allowConstantLoopConditions: true },
       ],
-      '@typescript-eslint/require-await': 'off',
-      'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/prefer-promise-reject-errors': 'off',
+      '@typescript-eslint/restrict-template-expressions': 'off',
+      'import/no-anonymous-default-export': 'warn',
     },
   },
   {
@@ -73,19 +76,28 @@ const baseConfig = tseslint.config(
   },
 )
 
-/** @type {Awaited<import('typescript-eslint').Config>} */
+/**
+ * A custom ESLint configuration for libraries that use React.
+ *
+ * @type {Awaited<import('typescript-eslint').Config>} */
 const reactConfig = [
   {
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
       react: reactPlugin,
+      'jsx-a11y': a11yPlugin,
       'react-hooks': hooksPlugin,
     },
+    settings: { react: { version: 'detect' } },
     rules: {
-      ...reactPlugin.configs['jsx-runtime'].rules,
-      ...hooksPlugin.configs.recommended.rules,
+      ...reactPlugin.configs.flat.recommended.rules,
+      ...a11yPlugin.flatConfigs.strict.rules,
+      ...hooksPlugin.configs['recommended-latest'].rules,
+
+      'react/no-unknown-property': 'off',
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
     },
-    languageOptions: { globals: { React: 'writable' } },
   },
 ]
 
@@ -95,10 +107,8 @@ const nextjsConfig = [
     files: ['**/*.ts', '**/*.tsx'],
     plugins: { '@next/next': nextPlugin },
     rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs['core-web-vitals'].rules,
-      // TypeError: context.getAncestors is not a function
-      '@next/next/no-duplicate-head': 'off',
+      ...nextPlugin.flatConfig.recommended.rules,
+      ...nextPlugin.flatConfig.coreWebVitals.rules,
     },
   },
 ]

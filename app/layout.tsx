@@ -1,22 +1,41 @@
 import '@/app/globals.css'
 
+import { Geist, Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 
-import { geistSans } from '@/lib/fonts'
-import { seo } from '@/lib/seo'
-import { TRPCReactProvider } from '@/lib/trpc/react'
+import { createMetadata } from '@/lib/metadata'
 import { cn } from '@/lib/utils'
 
-const RootLayout: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <html lang="en" suppressHydrationWarning>
-    <body className={cn('font-sans antialiased', geistSans.variable)}>
-      <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
-      </ThemeProvider>
-    </body>
-  </html>
-)
+const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+})
 
-export default RootLayout
+const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+})
 
-export const metadata = seo({})
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={cn(
+          'flex min-h-dvh flex-col font-sans antialiased',
+          geistSans.variable,
+          geistMono.variable,
+        )}
+      >
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
+export const metadata = createMetadata()

@@ -1,57 +1,94 @@
 import Image from 'next/image'
+import { AppWindowMacIcon, FileIcon, GlobeIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Typography } from '@/components/ui/typography'
-import { api, HydrateClient } from '@/lib/trpc/server'
-import { auth } from '@/server/auth'
-import { Post } from './_components/post'
 
-const Page: React.FC = async () => {
-  const session = await auth()
-  if (session) void api.post.getLatestPost.prefetch()
-
+export default function Homepage() {
   return (
-    <HydrateClient>
-      <main className="container flex min-h-dvh max-w-screen-lg flex-col items-center justify-center overflow-x-hidden">
-        <div className="pointer-events-none relative flex place-items-center before:absolute before:h-[700px] before:w-[140px] before:translate-x-1 before:translate-y-[-10px] before:rotate-[-32deg] before:rounded-full before:bg-gradient-to-r before:from-[#AB1D1C] before:to-[#E18317] before:opacity-30 before:blur-[100px] before:content-[''] lg:before:h-[700px] lg:before:w-[240px] lg:before:translate-x-[-100px]" />
-
+    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20">
+      <main className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
         <Image
-          src="https://tiesen.id.vn/assets/tiesen.png"
-          width={2500}
-          height={400}
-          alt="tiesen"
+          className="dark:invert"
+          src="/next.svg"
+          alt="Next.js logo"
+          width={180}
+          height={38}
           priority
         />
+        <ol className="list-inside list-decimal text-center font-mono text-sm/6 sm:text-left">
+          <li className="mb-2 tracking-[-.01em]">
+            Get started by editing{' '}
+            <code className="bg-secondary rounded px-1 py-0.5 font-mono font-semibold">
+              app/page.tsx
+            </code>
+            .
+          </li>
+          <li className="tracking-[-.01em]">
+            Save and see your changes instantly.
+          </li>
+        </ol>
 
-        <Typography level="h1" className="text-center brightness-150">
-          A Next.js template with{' '}
-          <span className="bg-[linear-gradient(135deg,#3178C6,69%,hsl(var(--background)))] bg-clip-text text-transparent">
-            TypeScript
-          </span>
-          ,{' '}
-          <span className="bg-[linear-gradient(135deg,#06B6D4,69%,hsl(var(--background)))] bg-clip-text text-transparent">
-            Tailwind CSS
-          </span>
-          ,{' '}
-          <span className="bg-[linear-gradient(135deg,#4B32C3,69%,hsl(var(--background)))] bg-clip-text text-transparent">
-            ESLint
-          </span>{' '}
-          and{' '}
-          <span className="bg-[linear-gradient(135deg,#F7B93E,69%,hsl(var(--background)))] bg-clip-text text-transparent">
-            Prettier
-          </span>
-        </Typography>
-
-        {session ? (
-          <Post name={session.user.username} />
-        ) : (
-          <form action="/api/auth/discord">
-            <Button>Sign In</Button>
-          </form>
-        )}
+        <div className="flex flex-col items-center gap-4 sm:flex-row">
+          <Button size="lg" asChild>
+            <a
+              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                className="dark:invert"
+                src="/vercel.svg"
+                alt="Vercel logomark"
+                width={20}
+                height={20}
+              />
+              Deploy now
+            </a>
+          </Button>
+          <Button variant="secondary" size="lg" asChild>
+            <a
+              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Read our docs
+            </a>
+          </Button>
+        </div>
       </main>
-    </HydrateClient>
+      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-[24px]">
+        <Button variant="link" asChild>
+          <a
+            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FileIcon />
+            Learn
+          </a>
+        </Button>
+
+        <Button variant="link" asChild>
+          <a
+            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AppWindowMacIcon />
+            Examples
+          </a>
+        </Button>
+        <Button variant="link" asChild>
+          <a
+            href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GlobeIcon />
+            Go to nextjs.org →
+          </a>
+        </Button>
+      </footer>
+    </div>
   )
 }
-
-export default Page

@@ -7,20 +7,22 @@ const config = {
   /* General Prettier Config */
   semi: false,
   tabWidth: 2,
-  printWidth: 100,
+  printWidth: 80,
   singleQuote: true,
   trailingComma: 'all',
 
-  plugins: ['@ianvs/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
+  plugins: [
+    '@ianvs/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss',
+  ],
 
-  /* Tailwind Classname Sorting Config */
   tailwindFunctions: ['cn', 'cva'],
 
-  /* Sort Imports Config */
   importOrder: [
     '<TYPES>',
+    '^(react/(.*)$)|^(react$)|^(react-native(.*)$)',
     '^(next/(.*)$)|^(next$)',
-    '^(react/(.*)$)|^(react$)',
+    '^(expo(.*)$)|^(expo$)',
     '<THIRD_PARTY_MODULES>',
     '',
     '<TYPES>^(@/(.*)$)',
