@@ -18,6 +18,7 @@ out/
 next-env.d.ts
 
 # misc
+.cache/
 .DS_Store
 *.pem
 
@@ -36,4 +37,3 @@ yarn-error.log*
 
 # typescript
 dist/
-.cache
