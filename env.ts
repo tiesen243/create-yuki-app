@@ -1,6 +1,6 @@
 import { createEnv } from '@t3-oss/env-nextjs'
 import { vercel } from '@t3-oss/env-nextjs/presets-zod'
-import { z } from 'zod'
+import { z } from 'zod/v4'
 
 export const env = createEnv({
   extends: [vercel()],
@@ -22,12 +22,7 @@ export const env = createEnv({
    */
   client: {},
 
-  /**
-   * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
-   * middlewares) or client-side so we need to destruct manually.
-   */
   experimental__runtimeEnv: process.env,
-
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
    * useful for Docker builds.
