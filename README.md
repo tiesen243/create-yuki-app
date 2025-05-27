@@ -13,7 +13,7 @@ bun create next-app --example https://github.com/tiesen243/create-yuki-app
 2. Set up environment variables:
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
 3. Start the development server:
