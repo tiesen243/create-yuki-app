@@ -1,5 +1,8 @@
 # Create Yuki App
 
+> [!WARNING]
+> This repository has been moved to [tiesen243/create-yuki-stack](https://github.com/tiesen243/create-yuki-stack)
+
 A modern Next.js starter template with TypeScript, Tailwind CSS, and shadcn/ui components.
 
 ## Installation
